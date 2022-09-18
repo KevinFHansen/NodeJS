@@ -1,20 +1,23 @@
 //express = node bibliotek
-const express = require("express");
+import express from "express";
 const app = express();
-
+app.use(express.json());
 
 const weaponsList = [
     {
+        id: "1",
         name: "AK-47",
-        rounds: 30
+        rounds: "30"
     },
     {
+        id: "2",
         name: "Knife",
-        rounds: 0
+        rounds: "0"
     },
     {
+        id: "3",
         name: "Pistol",
-        rounds: 12
+        rounds: "12"
     }
 ]
 
@@ -24,13 +27,67 @@ app.get("/", (request, response) =>{
     })
 });
 
+//Get full weapon list or query string 
 app.get("/weapons", (req, res) => {
+    if(req.query.name){
+        const filteredList = weaponsList.filter(f => f.name === req.query.name)
+        res.send(filteredList)
+    }
+    else{
     res.send(weaponsList)
+}
 })
 
+//Get weapon on id
 app.get("/weapons/:id", (req, res) => {
-    res.send(weaponsList[req.params.id])
+    const filteredWeaponListID = weaponsList.filter(i => i.id === req.params.id)
+    res.send(filteredWeaponListID)
 })
+
+//Post
+app.post("/weapons", (req, res) => {
+    const weapon = req.body;
+    weaponsList.push(weapon)
+    res.send("hello");
+});
+
+//Delete - Problemer med at finde id'et på objektet. Finder pt på array index
+app.delete("/weapons/:id", (req, res) =>{
+    const idToDelete = weaponsList.filter(i => i.id === req.params.id)
+    weaponsList.splice([idToDelete] , 1);
+    res.send("DELETED!!")
+})
+
+//Put
+app.put("/weapons/:id", (req, res) => {
+    const idPut = req.params.id;
+    const {id, name, rounds} = req.body;
+    const weaponToBeUpdated = weaponsList.find((weapon) => weapon.id === idPut)
+    weaponToBeUpdated.id = id;
+    weaponToBeUpdated.name = name;
+    weaponToBeUpdated.rounds = rounds;
+    res.send("updated ${idPut}")
+})
+
+
+//Patch - Burde kunne lave noget mere generisk. Har ikke knækket koden til ikke at skulle generere en masse if statements endnu. 
+app.patch("/weapons/:id", (req, res) => {
+    const idPatch = req.params.id;
+    const {name, rounds} = req.body;
+    const weaponToBeUpdated = weaponsList.find((weapon) => weapon.id === idPatch)
+    console.log(weaponToBeUpdated);
+    if (id){
+        weaponToBeUpdated.id = id
+    }
+    if(name){
+        weaponToBeUpdated.name = name;
+    }
+    if(rounds){
+        weaponToBeUpdated.rounds = rounds;
+    }
+    res.send("updated ${idPatch}")
+})
+
 
 app.listen(8080, () => {
     console.log("Listening on port", 8080)
@@ -39,29 +96,4 @@ app.listen(8080, () => {
 
 
 
-// Har eksperimenteret med query string, men kunne ikke få det helt til at virke. 
-
-// for(let i = 0; i < weaponlist.length; i++){
-//     if ("Pistol" === weaponlist[i].name){
-//         console.log(weaponlist[i])
-//     }
-//     else {
-//         console.log("MINUSRESPKET")
-//     }
-// }
-
-
-
-// app.get("/weapons", (req, res) => {
-//     const newArray= [];
-//     for(let i = 0; i < weaponlist.length; i++){
-//         if (req.query.name === weaponlist[i].name){
-//             newArray.push(weaponlist[i])
-//         }
-//         else {
-//         }
-//     }
-//     res.send(newArray)
-// }
-// )
 
