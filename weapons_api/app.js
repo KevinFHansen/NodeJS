@@ -46,48 +46,47 @@ app.get("/weapons/:id", (req, res) => {
 
 //Post
 app.post("/weapons", (req, res) => {
-    const weapon = req.body;
+    const weapon = req.body
     weaponsList.push(weapon)
-    res.send("hello");
+    res.send("Posted")
 });
 
 //Delete - Problemer med at finde id'et på objektet. Finder pt på array index
 app.delete("/weapons/:id", (req, res) =>{
     const idToDelete = weaponsList.filter(i => i.id === req.params.id)
-    weaponsList.splice([idToDelete] , 1);
-    res.send("DELETED!!")
+    weaponsList.splice([idToDelete] , 1)
+    res.send("Deleted")
 })
 
 //Put
 app.put("/weapons/:id", (req, res) => {
-    const idPut = req.params.id;
-    const {id, name, rounds} = req.body;
+    const idPut = req.params.id
+    const {id, name, rounds} = req.body
     const weaponToBeUpdated = weaponsList.find((weapon) => weapon.id === idPut)
-    weaponToBeUpdated.id = id;
-    weaponToBeUpdated.name = name;
-    weaponToBeUpdated.rounds = rounds;
-    res.send("updated ${idPut}")
+    weaponToBeUpdated.id = id
+    weaponToBeUpdated.name = name
+    weaponToBeUpdated.rounds = rounds
+    res.send("Updated")
 })
 
 
-//Patch - Burde kunne lave noget mere generisk. Har ikke knækket koden til ikke at skulle generere en masse if statements endnu. 
+//Patch - Burde kunne lave noget mere generisk. Har ikke knækket koden til ikke at skulle generere en masse if statements endnu
 app.patch("/weapons/:id", (req, res) => {
-    const idPatch = req.params.id;
-    const {name, rounds} = req.body;
+    const idPatch = req.params.id
+    const {id, name, rounds} = req.body
     const weaponToBeUpdated = weaponsList.find((weapon) => weapon.id === idPatch)
-    console.log(weaponToBeUpdated);
+    console.log(weaponToBeUpdated)
     if (id){
         weaponToBeUpdated.id = id
     }
     if(name){
-        weaponToBeUpdated.name = name;
+        weaponToBeUpdated.name = name
     }
     if(rounds){
-        weaponToBeUpdated.rounds = rounds;
+        weaponToBeUpdated.rounds = rounds
     }
-    res.send("updated ${idPatch}")
+    res.send("Updated")
 })
-
 
 app.listen(8080, () => {
     console.log("Listening on port", 8080)
