@@ -1,0 +1,24 @@
+{
+  "name": "middleware_security",
+  "version": "0.0.1",
+  "description": "defining middleware for express and security",
+  "main": "app.js",
+  "type": "module",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "express",
+    "security",
+    "middleware"
+  ],
+  "author": "Kevin",
+  "license": "MIT",
+  "dependencies": {
+    "bcrypt": "^5.1.0",
+    "express": "^4.18.2",
+    "express-rate-limit": "^6.6.0",
+    "express-session": "^1.17.3",
+    "helmet": "^6.0.0"
+  }
+}

@@ -1,0 +1,10 @@
+assets = svelte.svg
+public = statiske filer
+jsconfig.json = Hvad skal compileren gøre.
+vite-env.d.ts = enviroement filer 
+
+package.json 
+- build = 
+- Preview = tager build og "laver" en "server"
+- Vite = bundle, compileren
+- Svelte = Framework

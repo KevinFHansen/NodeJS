@@ -1,0 +1,10 @@
+main {
+    min-height: calc(100vh - 95px);
+}
+nav{
+    height: 4vh;
+}
+
+footer{
+    height: 4vh;
+}

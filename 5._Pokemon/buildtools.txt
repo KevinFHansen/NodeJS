@@ -1,0 +1,6 @@
+Maven           VS          NPM
+pom.xml                     package.json
+     Sections / Responsibilities
+Meta Data                   Meta Data
+Dependencies                Dependencies
+Life cycles                 Scripts

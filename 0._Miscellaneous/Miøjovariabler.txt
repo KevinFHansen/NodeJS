@@ -1,0 +1,21 @@
+//Hvad er en process?
+
+npm run "scriptname" --> til at runne script
+$env:PORT=8080 nodemon app.js
+console.log(process)
+PORT=9000 nodemon app.js  --> Definer miljøvarbiale
+console.log(process.env.PORT) --> log miljøvariable
+
+
+cross-env pakke 
+
+npm i --save-dev croos-env --> Fixer probleme med miljøvariable på forskellige platforme 
+script --> start-dev --> "start-dev": cross-env PORT=8080 nodemon app.js
+
+Til at lave en fallback port
+const PORT = process.env.PORT ? process.env.PORT : 8080
+const PORT = process.env.PORT || 8080;
+
+
+ FÅ NODEMON TIL AT LYTTE TIL SPECIFIKKE FILER
+        nodemon  app.js --ext=html,js

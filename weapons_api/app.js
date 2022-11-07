@@ -38,7 +38,7 @@ app.get("/weapons", (req, res) => {
 }
 })
 
-//Get weapon on id
+//Get weapon on id - Brug find() i stedet for. Filter tjekker hele listen
 app.get("/weapons/:id", (req, res) => {
     const filteredWeaponListID = weaponsList.filter(i => i.id === req.params.id)
     res.send(filteredWeaponListID)
